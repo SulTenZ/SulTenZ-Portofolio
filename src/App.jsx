@@ -1,8 +1,25 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./sections/Navbar";
+import Footer from "./sections/Footer";
+import Home from "./pages/Home";
+import Projects from "./pages/Projects";
+import Contacts from "./pages/Contacts";
+
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-white to-blue-300">
-      <h1 className="text-4xl font-extrabold text-blue-700">React + Tailwind v3.4.17 + Vite Siap! 🚀</h1>
-    </div>
+    <Router>
+      <div className="bg-background min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex-1">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/contacts" element={<Contacts />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 export default App;
