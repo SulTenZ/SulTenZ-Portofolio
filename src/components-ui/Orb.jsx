@@ -1,4 +1,3 @@
-// src/components-ui/Orb.jsx
 import { useEffect, useRef } from "react";
 import { Renderer, Program, Mesh, Triangle, Vec3 } from "ogl";
 
@@ -21,6 +20,7 @@ export default function Orb({
     }
   `;
 
+  // Perhatikan perubahan di bagian gl_FragColor agar area di luar orb full transparan!
   const frag = /* glsl */ `
     precision highp float;
 
@@ -38,14 +38,14 @@ export default function Orb({
       float q = dot(c, vec3(0.211, -0.523, 0.312));
       return vec3(y, i, q);
     }
-    
+
     vec3 yiq2rgb(vec3 c) {
       float r = c.x + 0.956 * c.y + 0.621 * c.z;
       float g = c.x - 0.272 * c.y - 0.647 * c.z;
       float b = c.x - 1.106 * c.y + 1.703 * c.z;
       return vec3(r, g, b);
     }
-    
+
     vec3 adjustHue(vec3 color, float hueDeg) {
       float hueRad = hueDeg * 3.14159265 / 180.0;
       vec3 yiq = rgb2yiq(color);
@@ -116,55 +116,58 @@ export default function Orb({
       vec3 color1 = adjustHue(baseColor1, hue);
       vec3 color2 = adjustHue(baseColor2, hue);
       vec3 color3 = adjustHue(baseColor3, hue);
-      
+
       float ang = atan(uv.y, uv.x);
       float len = length(uv);
       float invLen = len > 0.0 ? 1.0 / len : 0.0;
-      
+
       float n0 = snoise3(vec3(uv * noiseScale, iTime * 0.5)) * 0.5 + 0.5;
       float r0 = mix(mix(innerRadius, 1.0, 0.4), mix(innerRadius, 1.0, 0.6), n0);
       float d0 = distance(uv, (r0 * invLen) * uv);
       float v0 = light1(1.0, 10.0, d0);
       v0 *= smoothstep(r0 * 1.05, r0, len);
       float cl = cos(ang + iTime * 2.0) * 0.5 + 0.5;
-      
+
       float a = iTime * -1.0;
       vec2 pos = vec2(cos(a), sin(a)) * r0;
       float d = distance(uv, pos);
       float v1 = light2(1.5, 5.0, d);
       v1 *= light1(1.0, 50.0, d0);
-      
+
       float v2 = smoothstep(1.0, mix(innerRadius, 1.0, n0 * 0.5), len);
       float v3 = smoothstep(innerRadius, mix(innerRadius, 1.0, 0.5), len);
-      
+
       vec3 col = mix(color1, color2, cl);
       col = mix(color3, col, v0);
       col = (col + v1) * v2 * v3;
       col = clamp(col, 0.0, 1.0);
-      
-      return extractAlpha(col);
+
+      // Alpha = orb glow saja, di luar radius tertentu = 0 (transparan)
+      float orbAlpha = smoothstep(1.1, 0.85, length(uv)); // area 0.85-1.1 = fade, di luar 1.1 = 0
+      return vec4(col, orbAlpha * col.r); // bisa juga orbAlpha * max(col.r, col.g, col.b)
     }
 
     vec4 mainImage(vec2 fragCoord) {
       vec2 center = iResolution.xy * 0.5;
       float size = min(iResolution.x, iResolution.y);
       vec2 uv = (fragCoord - center) / size * 2.0;
-      
+
       float angle = rot;
       float s = sin(angle);
       float c = cos(angle);
       uv = vec2(c * uv.x - s * uv.y, s * uv.x + c * uv.y);
-      
+
       uv.x += hover * hoverIntensity * 0.1 * sin(uv.y * 10.0 + iTime);
       uv.y += hover * hoverIntensity * 0.1 * sin(uv.x * 10.0 + iTime);
-      
+
       return draw(uv);
     }
 
     void main() {
       vec2 fragCoord = vUv * iResolution.xy;
       vec4 col = mainImage(fragCoord);
-      gl_FragColor = vec4(col.rgb * col.a, col.a);
+      if (col.a < 0.02) discard;  // pastikan pixel transparan tidak digambar (benar-benar no background)
+      gl_FragColor = col;
     }
   `;
 
@@ -174,7 +177,7 @@ export default function Orb({
 
     const renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
     const gl = renderer.gl;
-    gl.clearColor(0, 0, 0, 0);
+    gl.clearColor(0, 0, 0, 0); // Pastikan canvas selalu transparan!
     container.appendChild(gl.canvas);
 
     const geometry = new Triangle(gl);
@@ -276,20 +279,8 @@ export default function Orb({
       container.removeChild(gl.canvas);
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hue, hoverIntensity, rotateOnHover, forceHoverState]);
 
   return <div ref={ctnDom} className="w-full h-full" />;
 }
-
-
-// import Orb from './Orb';
-
-// <div style={{ width: '100%', height: '600px', position: 'relative' }}>
-//   <Orb
-//     hoverIntensity={0.5}
-//     rotateOnHover={true}
-//     hue={0}
-//     forceHoverState={false}
-//   />
-// </div>
