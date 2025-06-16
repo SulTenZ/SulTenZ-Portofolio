@@ -42,7 +42,7 @@ function About() {
             from-secondary/70 via-secondary/40 to-transparent blur-2xl opacity-60 z-0" />
       
       <div className="relative z-10 max-w-5xl mx-auto px-4">
-        <h2 className="font-jakarta text-3xl text-white font-bold mb-8">About Me</h2>
+        <h2 className="font-jakarta text-4xl text-white font-bold mb-8">About Me</h2>
         <AnimatedTestimonials testimonials={aboutSections} autoplay />
       </div>
     </section>

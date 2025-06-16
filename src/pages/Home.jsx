@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Preloader from "../components-ui/Preloader";
 import Hero from "../sections/Hero";
+import SliderTextHover from "../sections/SliderTextHover"; // <-- import baru
 import Slider from "../sections/Slider";
 import About from "../sections/About";
 import Skills from "../sections/Skills";

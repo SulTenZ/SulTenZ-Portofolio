@@ -1,5 +1,6 @@
 // tailwind.config.js
 
+const colors = require("tailwindcss/colors");
 const {
   default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
@@ -8,7 +9,7 @@ const {
 module.exports = {
   content: [
     "./index.html",
-    "./src/**/*.{js,jsx,ts,tsx}",   // tambahkan js/jsx juga (bukan hanya ts/tsx)
+    "./src/**/*.{js,jsx,ts,tsx}",
   ],
   darkMode: "class",
   theme: {
@@ -23,8 +24,12 @@ module.exports = {
       fontFamily: {
         jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
         dmsans: ['"DM Sans"', 'sans-serif'],
-        // Bisa override default:
+        // Override default sans
         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+      },
+      // ===== Custom Box Shadow =====
+      boxShadow: {
+        input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,
       },
       // ===== Animations Aurora =====
       animation: {

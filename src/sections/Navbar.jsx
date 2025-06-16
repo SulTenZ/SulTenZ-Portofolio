@@ -1,12 +1,14 @@
 // src/sections/Navbar.jsx
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import logo from "../assets/logo.png"; // Pastikan path benar sesuai struktur projekmu
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
+  // Scroll behavior & shadow
   useEffect(() => {
     window.scrollTo(0, 0);
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -14,14 +16,12 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [location]);
 
-  // Close mobile menu when location changes
+  // Close mobile menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location]);
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
+  const toggleMobileMenu = () => setMobileMenuOpen((prev) => !prev);
 
   return (
     <nav
@@ -30,11 +30,13 @@ function Navbar() {
         ${scrolled ? "bg-background/90 shadow-lg backdrop-blur-md" : "bg-transparent"}`
       }
     >
-      <Link
-        to="/"
-        className="text-white font-jakarta font-bold text-lg md:text-2xl tracking-tight"
-      >
-        SUL<span className="text-main">TENZ</span>
+      {/* Logo */}
+      <Link to="/" className="flex items-center">
+        <img
+          src={logo}
+          alt="SulTenZ Logo"
+          className="h-10 w-auto md:h-12 object-contain"
+        />
       </Link>
 
       {/* Desktop Navigation */}
