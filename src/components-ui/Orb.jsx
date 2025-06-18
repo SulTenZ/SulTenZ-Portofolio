@@ -1,3 +1,4 @@
+// src/components-ui/Orb.jsx
 import { useEffect, useRef } from "react";
 import { Renderer, Program, Mesh, Triangle, Vec3 } from "ogl";
 

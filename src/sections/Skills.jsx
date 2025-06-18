@@ -1,3 +1,4 @@
+// src/sections/Skills.jsx
 import { Timeline } from "../components-ui/Timeline";
 
 function Skills() {

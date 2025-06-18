@@ -1,3 +1,4 @@
+// src/sections/Footer.jsx
 import { TextHoverEffect } from "../components-ui/TextHoverEffect";
 
 function Footer() {

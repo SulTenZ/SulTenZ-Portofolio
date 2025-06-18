@@ -1,6 +1,5 @@
 // src/sections/About.jsx
 import { AnimatedTestimonials } from "../components-ui/AnimatedTestimonial";
-// Import gambar lokal, pastikan path & nama file benar!
 import about1 from "../assets/about-1.jpg";
 import about2 from "../assets/about-2.jpg";
 import about3 from "../assets/about-3.jpg";

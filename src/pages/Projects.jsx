@@ -2,12 +2,10 @@
 import ProjectCard from "../components/ProjectCard";
 
 function Projects() {
-  // Ganti dengan fetch data aslinya nanti
   const projects = [
     { title: "Web Portfolio", description: "My personal website built with React & Tailwind.", image: "/assets/project1.png", link: "#" },
     { title: "Todo App", description: "A simple todo app using local storage.", image: "/assets/project2.png", link: "#" },
     { title: "Landing Page", description: "Landing page for a fictitious product.", image: "/assets/project3.png", link: "#" },
-    // Tambah project lain di sini
   ];
 
   return (

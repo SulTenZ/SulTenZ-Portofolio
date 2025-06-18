@@ -1,3 +1,4 @@
+// src/pages/Home.jsx
 import { useState } from "react";
 import Preloader from "../components-ui/Preloader";
 import Hero from "../sections/Hero";

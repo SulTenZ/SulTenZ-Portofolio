@@ -1,3 +1,4 @@
+// src/components-ui/EvervaultBackground.jsx
 "use client"
 import { useMotionValue, useMotionTemplate, motion } from "motion/react"
 import { useState, useEffect } from "react"
