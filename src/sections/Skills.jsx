@@ -32,7 +32,7 @@ function Skills() {
     {
       title: "Web Foundation",
       content: (
-        <div className="flex flex-wrap gap-6 md:gap-8 mb-4">
+        <div className="flex flex-wrap justify-end gap-6 md:gap-8 mb-4">
           <SkillIcon icon={<DiHtml5 size={75} />} name="HTML" />
           <SkillIcon icon={<DiCss3 size={75} />} name="CSS" />
           <SkillIcon icon={<DiJavascript1 size={75} />} name="JavaScript" />
@@ -42,7 +42,7 @@ function Skills() {
     {
       title: "Front-End Development",
       content: (
-        <div className="flex flex-wrap gap-6 md:gap-8 mb-4">
+        <div className="flex flex-wrap justify-end gap-6 md:gap-8 mb-4">
           <SkillIcon icon={<DiReact size={75} />} name="React.js" />
           <SkillIcon icon={<SiNextdotjs size={75} />} name="Next.js" />
           <SkillIcon icon={<SiTailwindcss size={75} />} name="Tailwind CSS" />
@@ -52,7 +52,7 @@ function Skills() {
     {
       title: "Mobile Development",
       content: (
-        <div className="flex flex-wrap gap-6 md:gap-8 mb-4">
+        <div className="flex flex-wrap justify-end gap-6 md:gap-8 mb-4">
           <SkillIcon icon={<SiFlutter size={75} />} name="Flutter" />
           <SkillIcon icon={<SiDart size={75} />} name="Dart" />
         </div>
@@ -61,7 +61,7 @@ function Skills() {
     {
       title: "Back-End & Database",
       content: (
-        <div className="flex flex-wrap gap-6 md:gap-8 mb-4">
+        <div className="flex flex-wrap justify-end gap-6 md:gap-8 mb-4">
           <SkillIcon icon={<DiNodejsSmall size={75} />} name="Node.js" />
           <SkillIcon icon={<SiExpress size={75} />} name="Express.js" />
           <SkillIcon icon={<DiMongodb size={75} />} name="MongoDB" />
@@ -72,7 +72,7 @@ function Skills() {
     {
       title: "Deployment & Tools",
       content: (
-        <div className="flex flex-wrap gap-6 md:gap-8 mb-4">
+        <div className="flex flex-wrap justify-end gap-6 md:gap-8 mb-4">
           <SkillIcon icon={<DiGit size={75} />} name="Git" />
           <SkillIcon icon={<DiGithubBadge size={75} />} name="GitHub" />
           <SkillIcon icon={<SiVercel size={75} />} name="Vercel" />
