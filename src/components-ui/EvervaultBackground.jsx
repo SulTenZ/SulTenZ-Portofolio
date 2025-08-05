@@ -30,7 +30,7 @@ export const EvervaultBackground = ({ children, className }) => {
     mouseX.set(clientX - left)
     mouseY.set(clientY - top)
 
-    const str = generateRandomString(15000)
+    const str = generateRandomString(30000)
     setRandomString(str)
   }
 
