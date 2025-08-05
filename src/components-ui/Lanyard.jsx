@@ -7,7 +7,6 @@ import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint } from '@react-three/rapier';
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 
-// replace with your own imports, see the usage snippet for details
 import cardGLB from "../assets/card.glb";
 import lanyard from "../assets/lanyard.png";
 
@@ -118,7 +117,7 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
           <group
             scale={2.25}
             position={[0, -1.2, -0.05]}
-            rotation={[0, Math.PI, 0]} // Model diputar 180 derajat
+            rotation={[0, Math.PI, 0]}
             onPointerOver={() => hover(true)}
             onPointerOut={() => hover(false)}
             onPointerUp={(e) => (e.target.releasePointerCapture(e.pointerId), drag(false))}

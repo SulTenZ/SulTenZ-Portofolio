@@ -1,5 +1,4 @@
 // src/sections/Lanyard.jsx
-
 import Lanyard from "../components-ui/Lanyard";
 import MoreButton from "../components/MoreButton";
 

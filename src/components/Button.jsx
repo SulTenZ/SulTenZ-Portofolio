@@ -1,7 +1,7 @@
+// src/components/Button.jsx
 "use client";
 import { cn } from "../utils/util";
 
-// Warna secondary dari tailwind config-mu (#A287F4)
 function BottomGradient() {
   return (
     <>

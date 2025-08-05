@@ -7,20 +7,18 @@ export default function Preloader({ onFinish }) {
   const [progress, setProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Naikkan progress dari 0 ke 100
   useEffect(() => {
     if (progress < 100) {
-      const timer = setTimeout(() => setProgress(progress + 2), 15); // Speed bisa diatur
+      const timer = setTimeout(() => setProgress(progress + 2), 15);
       return () => clearTimeout(timer);
     } else {
-      setTimeout(() => setIsLoaded(true), 400); // Delay biar 100% ga langsung hilang
+      setTimeout(() => setIsLoaded(true), 400);
     }
   }, [progress]);
 
-  // Beri sinyal ke parent kalau loading selesai
   useEffect(() => {
     if (isLoaded) {
-      setTimeout(() => onFinish(), 800); // Biar animasi slide up dulu
+      setTimeout(() => onFinish(), 800);
     }
   }, [isLoaded, onFinish]);
 

@@ -8,7 +8,7 @@ export default function MoreButton({ targetName = null, offset = 0 }) {
         duration: 500,
         delay: 0,
         smooth: "easeInOutQuart",
-        offset: offset, // bisa atur offset jika perlu
+        offset: offset,
       });
     } else {
       window.scrollBy({

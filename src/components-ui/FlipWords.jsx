@@ -2,18 +2,17 @@
 "use client";
 import React, { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { cn } from "../utils/util"; // pastikan path ke util cn kamu benar
+import { cn } from "../utils/util";
 
 export const FlipWords = ({
   words,
   duration = 3000,
   className,
-  classMap = {}, // <-- tambahkan prop baru classMap
+  classMap = {},
 }) => {
   const [currentWord, setCurrentWord] = useState(words[0]);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  // thanks for the fix Julian - https://github.com/Julian-AT
   const startAnimation = useCallback(() => {
     const word = words[words.indexOf(currentWord) + 1] || words[0];
     setCurrentWord(word);
@@ -54,7 +53,6 @@ export const FlipWords = ({
           scale: 2,
           position: "absolute",
         }}
-        // Kunci: gunakan classMap berdasarkan currentWord
         className={cn(
           "z-10 inline-block relative text-left text-neutral-900 dark:text-neutral-100 px-2",
           classMap[currentWord],
@@ -62,7 +60,6 @@ export const FlipWords = ({
         )}
         key={currentWord}
       >
-        {/* edit suggested by Sajal: https://x.com/DewanganSajal */}
         {currentWord.split(" ").map((word, wordIndex) => (
           <motion.span
             key={word + wordIndex}

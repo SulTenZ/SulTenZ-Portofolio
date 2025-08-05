@@ -1,14 +1,13 @@
 // src/sections/Navbar.jsx
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import logo from "../assets/logo.png"; // Pastikan path benar sesuai struktur projekmu
+import logo from "../assets/logo.png";
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  // Scroll behavior & shadow
   useEffect(() => {
     window.scrollTo(0, 0);
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -16,7 +15,6 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [location]);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location]);

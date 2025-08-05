@@ -31,11 +31,9 @@ const aboutSections = [
 function About() {
   return (
     <section className="relative w-full min-h-screen py-32 px-0 bg-background" id="about">
-      {/* Bola gradient main kiri bawah */}
       <div className="pointer-events-none absolute left-[-80px] bottom-[-80px] w-60 h-60 md:w-80 md:h-80 rounded-full 
             bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))]
             from-main/70 via-main/40 to-transparent blur-2xl opacity-60 z-0" />
-      {/* Bola gradient secondary kanan atas */}
       <div className="pointer-events-none absolute right-0 top-0 w-48 h-48 md:w-72 md:h-72 rounded-full 
             bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))]
             from-secondary/70 via-secondary/40 to-transparent blur-2xl opacity-60 z-0" />

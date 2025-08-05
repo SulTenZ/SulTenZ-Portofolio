@@ -10,7 +10,6 @@ import { cn } from "../utils/util";
 export function ContactForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
-    // handle submit
   };
 
   return (

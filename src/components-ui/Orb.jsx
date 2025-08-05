@@ -21,7 +21,6 @@ export default function Orb({
     }
   `;
 
-  // Perhatikan perubahan di bagian gl_FragColor agar area di luar orb full transparan!
   const frag = /* glsl */ `
     precision highp float;
 

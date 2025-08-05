@@ -15,7 +15,6 @@ export const Timeline = ({ data }) => {
     }
   }, [ref, data]);
 
-  // Ubah offset menjadi ["start end", "end start"] agar progress smooth sepanjang area container!
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],

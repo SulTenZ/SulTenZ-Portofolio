@@ -4,7 +4,6 @@ import Button from "../components/Button";
 import { Link } from "react-router-dom";
 
 function ProjectsSection() {
-  // Dummy data project
   const projects = [
     { title: "Web Portfolio", description: "My personal website built with React & Tailwind.", image: "/assets/project1.png", link: "#" },
     { title: "Todo App", description: "A simple todo app using local storage.", image: "/assets/project2.png", link: "#" },
