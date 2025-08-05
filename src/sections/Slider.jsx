@@ -7,7 +7,7 @@ function Slider() {
       <ScrollVelocity
         texts={[
           "Sultan Akmal Ghiffari",
-          "Front-End King",
+          "Fullstack Wanna Be",
         ]}
         className="text-white text-3xl md:text-5xl font-extrabold px-4"
         velocity={100}
