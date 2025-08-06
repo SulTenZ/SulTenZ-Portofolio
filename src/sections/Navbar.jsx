@@ -106,7 +106,7 @@ function Navbar() {
           >
             HOME
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="/projects"
             className={({ isActive }) =>
               `font-dmsans text-2xl hover:text-main transition ${isActive ? "text-secondary" : "text-white"}`
@@ -114,7 +114,7 @@ function Navbar() {
             onClick={() => setMobileMenuOpen(false)}
           >
             PROJECT
-          </NavLink>
+          </NavLink> */}
           <NavLink
             to="/contacts"
             className={({ isActive }) =>
