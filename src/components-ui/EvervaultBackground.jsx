@@ -36,12 +36,10 @@ export const EvervaultBackground = ({ children, className }) => {
 
   return (
     <div className={cn("w-full h-full relative overflow-hidden bg-transparent", className)}>
-      {/* Evervault Text Effect Overlay */}
       <div onMouseMove={onMouseMove} className="group/card absolute inset-0 w-full h-full pointer-events-none">
         <TextPattern mouseX={mouseX} mouseY={mouseY} randomString={randomString} />
       </div>
 
-      {/* Content */}
       <div className="relative z-20 w-full h-full flex items-center justify-center pointer-events-none">
         <div className="pointer-events-auto">{children}</div>
       </div>

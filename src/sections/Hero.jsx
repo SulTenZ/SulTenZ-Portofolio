@@ -14,11 +14,9 @@ function Hero() {
   return (
     <section className="w-full h-screen min-h-[540px] relative overflow-hidden flex items-center justify-center">
       <EvervaultOrbHero className="absolute inset-0 w-full h-full">
-        {/* ORB sebagai dekorasi */}
         <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
           <Orb hoverIntensity={0.5} rotateOnHover={true} hue={0} forceHoverState={false} />
         </div>
-        {/* Konten */}
         <div className="w-full h-full flex items-center justify-center px-3 md:px-4 relative z-10">
           <div className="max-w-[400px] sm:max-w-[600px] md:max-w-[900px] w-full mx-auto flex flex-col items-center text-center">
             <h1 className="text-2xl sm:text-3xl md:text-6xl font-jakarta font-extrabold mb-5 md:mb-6 text-white flex flex-wrap items-center gap-2 md:gap-3 justify-center text-center">

@@ -5,7 +5,7 @@ import { cn } from "../utils/util";
 import { useMotionTemplate, useMotionValue, motion } from "motion/react";
 
 const Input = React.forwardRef(({ className, type, ...props }, ref) => {
-  const radius = 100; // Radial hover radius
+  const radius = 100;
   const [visible, setVisible] = React.useState(false);
 
   let mouseX = useMotionValue(0);
