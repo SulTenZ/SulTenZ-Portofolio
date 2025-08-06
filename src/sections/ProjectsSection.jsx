@@ -3,27 +3,58 @@ import ProjectCard from "../components/ProjectCard";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
 
+import project1Image from "../assets/project-1.png";
+import project2Image from "../assets/project-2.png";
+import project3Image from "../assets/project-3.png";
+
 function ProjectsSection() {
   const projects = [
-    { title: "Web Portfolio", description: "My personal website built with React & Tailwind.", image: "/assets/project1.png", link: "#" },
-    { title: "Todo App", description: "A simple todo app using local storage.", image: "/assets/project2.png", link: "#" },
-    { title: "Landing Page", description: "Landing page for a fictitious product.", image: "/assets/project3.png", link: "#" },
+    { 
+      title: "VERDEX", 
+      description: "VERDEX merupakan sebuah agensi digital yang berfokus pada penyediaan layanan teknologi dan kreatif, di mana halaman projects mereka berfungsi sebagai portofolio untuk menampilkan hasil karya dan studi kasus kepada calon klien.", 
+      image: project1Image, 
+      link: "https://www.verdex.id/",
+      techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Pocketbase"]
+    },
+    { 
+      title: "Verdex Source", 
+      description: "Verdex Source adalah sebuah platform marketplace digital di mana para kreator dapat menjual berbagai jenis aset digital buatan mereka. Platform ini memungkinkan transaksi untuk beragam produk seperti template desain, kode sumber, aset game, dan karya kreatif lainnya.", 
+      image: project2Image, 
+      link: "#",
+      techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Pocketbase"]
+    },
+    { 
+      title: "SulTenZ AI", 
+      description: "SulTenZAI adalah sebuah persona AI yang lahir dari sebuah eksperimen iseng untuk menjajaki kemampuan AI dari Groq Cloud. Proyek ini pada dasarnya adalah sebuah proyek pribadi yang dibungkus dalam antarmuka cerdas dan interaktif.", 
+      image: project3Image, 
+      link: "#",
+      techStack: ["React.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Groq Cloud"]
+    },
   ];
 
   return (
     <section className="max-w-5xl mx-auto py-16 px-4" id="projects">
-      <h2 className="font-jakarta text-2xl text-main font-bold mb-6">Featured Projects</h2>
+      <div className="flex justify-between items-center mb-8">
+        <h2 className="font-jakarta text-4xl text-white font-bold">
+          Projects
+        </h2>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {projects.map((project, idx) => (
           <ProjectCard key={idx} {...project} />
         ))}
       </div>
-      <div className="flex justify-center">
+
+      {/* <div className="flex justify-center mt-8">
         <Link to="/projects">
-          <Button>See All Projects</Button>
+          <Button className="w-48"> 
+            See All Projects
+          </Button>
         </Link>
-      </div>
+      </div> */}
     </section>
   );
 }
+
 export default ProjectsSection;

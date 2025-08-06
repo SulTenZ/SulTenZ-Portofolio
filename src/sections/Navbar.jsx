@@ -48,14 +48,14 @@ function Navbar() {
         >
           HOME
         </NavLink>
-        <NavLink
+        {/* <NavLink
           to="/projects"
           className={({ isActive }) =>
             `font-dmsans text-base md:text-lg hover:text-main transition ${isActive ? "text-secondary" : "text-white"}`
           }
         >
           PROJECT
-        </NavLink>
+        </NavLink> */}
         <NavLink
           to="/contacts"
           className={({ isActive }) =>
