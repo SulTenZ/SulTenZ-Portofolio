@@ -38,7 +38,7 @@ export function ContactForm() {
           <TextArea
             id="message"
             required
-            placeholder="Type your message here..."
+            placeholder="Type your message here....."
           />
         </LabelInputContainer>
         <Button type="submit">
