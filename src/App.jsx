@@ -13,7 +13,7 @@ function App() {
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/projects" element={<Projects />} />
+            {/* <Route path="/projects" element={<Projects />} /> */}
             <Route path="/contacts" element={<Contacts />} />
           </Routes>
         </main>
