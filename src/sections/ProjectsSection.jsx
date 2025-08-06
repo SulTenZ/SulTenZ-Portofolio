@@ -3,9 +3,9 @@ import ProjectCard from "../components/ProjectCard";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
 
-import project1Image from "../assets/project-1.png";
-import project2Image from "../assets/project-2.png";
-import project3Image from "../assets/project-3.png";
+import project1Image from "../assets/project-1.PNG";
+import project2Image from "../assets/project-2.PNG";
+import project3Image from "../assets/project-3.PNG";
 
 function ProjectsSection() {
   const projects = [
