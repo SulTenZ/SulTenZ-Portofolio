@@ -6,6 +6,5 @@ This project fetches project data directly from Google Sheets as a “database�
 ## 🚀 Features
 
 - Modern and responsive UI
-- Fetch project data from Google Sheets API
 - Modular components (Hero, Projects, etc)
 - Easy to develop and deploy on Vercel/Netlify
