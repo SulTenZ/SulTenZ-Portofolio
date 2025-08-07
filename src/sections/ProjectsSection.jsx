@@ -21,14 +21,14 @@ function ProjectsSection() {
       description: "Verdex Source adalah sebuah platform marketplace digital di mana para kreator dapat menjual berbagai jenis aset digital buatan mereka. Platform ini memungkinkan transaksi untuk beragam produk seperti template desain, kode sumber, aset game, dan karya kreatif lainnya.", 
       image: project2Image, 
       link: "#",
-      techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Pocketbase"]
+      techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Pocketbase"]
     },
     { 
       title: "SulTenZ AI", 
       description: "SulTenZAI adalah sebuah persona AI yang lahir dari sebuah eksperimen iseng untuk menjajaki kemampuan AI dari Groq Cloud. Proyek ini pada dasarnya adalah sebuah proyek pribadi yang dibungkus dalam antarmuka cerdas dan interaktif.", 
       image: project3Image, 
       link: "#",
-      techStack: ["React.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Groq Cloud"]
+      techStack: ["Next.js", "Tailwind CSS", "Groq Cloud"]
     },
   ];
 
