@@ -14,9 +14,9 @@ const aboutSections = [
   },
   {
     name: "My Campus Life",
-    designation: "UTY Informatika Semester 6",
+    designation: "UTY Informatika Semester 7",
     quote:
-      "I'm currently a 6th semester Informatics student at Universitas Teknologi Yogyakarta (UTY). My daily life is all about coding, learning, and growing as a web developer. Campus projects and building real-world apps keep me busy and motivated.",
+      "I'm currently a 7th semester Informatics student at Universitas Teknologi Yogyakarta (UTY). My daily life is all about coding, learning, and growing as a web developer. Campus projects and building real-world apps keep me busy and motivated.",
     src: about2,
   },
   {
@@ -30,7 +30,7 @@ const aboutSections = [
 
 function About() {
   return (
-    <section className="relative w-full min-h-screen py-64 px-0 bg-background" id="about">
+    <section className="relative w-full min-h-screen py-32 px-0 bg-background" id="about">
       <div className="pointer-events-none absolute left-[-80px] bottom-[-80px] w-60 h-60 md:w-80 md:h-80 rounded-full 
             bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))]
             from-main/70 via-main/40 to-transparent blur-2xl opacity-60 z-0" />
