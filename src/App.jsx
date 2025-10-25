@@ -1,25 +1,68 @@
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+// src/App.jsx
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./sections/Navbar";
 import Footer from "./sections/Footer";
 import Home from "./pages/Home";
-// import Projects from "./pages/Projects";
+import Projects from "./pages/Projects";
 import Contacts from "./pages/Contacts";
 
-function App() {
+// Admin
+import AdminLayout from "./sections-admin/AdminLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminSkills from "./pages/admin/AdminSkills";
+import AdminProjects from "./pages/admin/AdminProjects";
+import AdminSkillGroups from "./pages/admin/AdminSkillGroups"; // <— import baru
+
+export default function App() {
   return (
-    <Router>
-      <div className="bg-background min-h-screen flex flex-col">
-        <Navbar />
-        <main className="flex-1">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            {/* <Route path="/projects" element={<Projects />} /> */}
-            <Route path="/contacts" element={<Contacts />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <BrowserRouter>
+      <Routes>
+        {/* public */}
+        <Route
+          path="/"
+          element={
+            <div className="bg-background min-h-screen flex flex-col">
+              <Navbar />
+              <main className="flex-1">
+                <Home />
+              </main>
+              <Footer />
+            </div>
+          }
+        />
+        <Route
+          path="/projects"
+          element={
+            <div className="bg-background min-h-screen flex flex-col">
+              <Navbar />
+              <main className="flex-1">
+                <Projects />
+              </main>
+              <Footer />
+            </div>
+          }
+        />
+        <Route
+          path="/contacts"
+          element={
+            <div className="bg-background min-h-screen flex flex-col">
+              <Navbar />
+              <main className="flex-1">
+                <Contacts />
+              </main>
+              <Footer />
+            </div>
+          }
+        />
+
+        {/* admin */}
+        <Route path="/admin/*" element={<AdminLayout />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="skills" element={<AdminSkills />} />
+          <Route path="skill-groups" element={<AdminSkillGroups />} /> {/* route baru */}
+          <Route path="projects" element={<AdminProjects />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
-export default App;

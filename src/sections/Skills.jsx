@@ -1,85 +1,31 @@
 // src/sections/Skills.jsx
 import { Timeline } from "../components-ui/Timeline";
-import {
-  DiHtml5,
-  DiCss3,
-  DiJavascript1,
-  DiReact,
-  DiNodejsSmall,
-  DiMongodb,
-  DiPostgresql,
-  DiGit,
-  DiGithubBadge,
-} from "react-icons/di";
-import {
-  SiNextdotjs,
-  SiTailwindcss,
-  SiFlutter,
-  SiDart,
-  SiExpress,
-  SiVercel,
-} from "react-icons/si";
+import { useMemo } from "react";
+import { useQuery } from "convex/react";
+import { api } from "../../convex/_generated/api";
 
-const SkillIcon = ({ icon, name }) => (
+const SkillIcon = ({ src, name }) => (
   <div className="flex flex-col items-center gap-2 text-neutral-400 transition-all duration-300 hover:scale-110 hover:text-white">
-    {icon}
+    <img src={src} alt={name} width={75} height={75} className="opacity-80" />
     <p className="text-sm font-jakarta">{name}</p>
   </div>
 );
 
-function Skills() {
-  const data = [
-    {
-      title: "Web Foundation",
+export default function Skills() {
+  const groups = useQuery(api.skills.listGroupsWithSkills) || [];
+
+  const data = useMemo(() => {
+    return groups.map((g) => ({
+      title: g.name,
       content: (
         <div className="flex flex-wrap justify-end gap-6 md:gap-8 mb-4">
-          <SkillIcon icon={<DiHtml5 size={75} />} name="HTML" />
-          <SkillIcon icon={<DiCss3 size={75} />} name="CSS" />
-          <SkillIcon icon={<DiJavascript1 size={75} />} name="JavaScript" />
+          {g.skills.map((s) => (
+            <SkillIcon key={s.id} src={s.imageUrl} name={s.name} />
+          ))}
         </div>
       ),
-    },
-    {
-      title: "Front-End Development",
-      content: (
-        <div className="flex flex-wrap justify-end gap-6 md:gap-8 mb-4">
-          <SkillIcon icon={<DiReact size={75} />} name="React.js" />
-          <SkillIcon icon={<SiNextdotjs size={75} />} name="Next.js" />
-          <SkillIcon icon={<SiTailwindcss size={75} />} name="Tailwind CSS" />
-        </div>
-      ),
-    },
-    {
-      title: "Mobile Development",
-      content: (
-        <div className="flex flex-wrap justify-end gap-6 md:gap-8 mb-4">
-          <SkillIcon icon={<SiFlutter size={75} />} name="Flutter" />
-          <SkillIcon icon={<SiDart size={75} />} name="Dart" />
-        </div>
-      ),
-    },
-    {
-      title: "Back-End & Database",
-      content: (
-        <div className="flex flex-wrap justify-end gap-6 md:gap-8 mb-4">
-          <SkillIcon icon={<DiNodejsSmall size={75} />} name="Node.js" />
-          <SkillIcon icon={<SiExpress size={75} />} name="Express.js" />
-          <SkillIcon icon={<DiMongodb size={75} />} name="MongoDB" />
-          <SkillIcon icon={<DiPostgresql size={75} />} name="PostgreSQL" />
-        </div>
-      ),
-    },
-    {
-      title: "Deployment & Tools",
-      content: (
-        <div className="flex flex-wrap justify-end gap-6 md:gap-8 mb-4">
-          <SkillIcon icon={<DiGit size={75} />} name="Git" />
-          <SkillIcon icon={<DiGithubBadge size={75} />} name="GitHub" />
-          <SkillIcon icon={<SiVercel size={75} />} name="Vercel" />
-        </div>
-      ),
-    },
-  ];
+    }));
+  }, [groups]);
 
   return (
     <section className="w-full min-h-screen py-32 px-0 bg-background" id="skills">
@@ -90,5 +36,3 @@ function Skills() {
     </section>
   );
 }
-
-export default Skills;
