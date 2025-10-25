@@ -1,4 +1,4 @@
-// src/sections/Hero.jsx
+// File: src/sections/Hero.jsx
 import EvervaultOrbHero from "../components-ui/EvervaultBackground";
 import Orb from "../components-ui/Orb";
 import { FlipWords } from "../components-ui/FlipWords";
@@ -25,14 +25,14 @@ function Hero() {
                 <ColourfulText text="SULTAN^^" />
               </span>
             </h1>
-            <p className="font-dmsans text-sm sm:text-lg md:text-2xl text-gray-200 mb-3 md:mb-4 tracking-widest flex flex-col gap-2 items-center text-center">
+            <div className="font-dmsans text-sm sm:text-lg md:text-2xl text-gray-200 mb-3 md:mb-4 tracking-widest flex flex-col gap-2 items-center text-center">
               I DEVELOP & LEARNING ABOUT{" "}
               <FlipWords
                 words={flipWords}
                 duration={3000}
                 classMap={flipWordClassMap}
               />
-            </p>
+            </div>
           </div>
         </div>
       </EvervaultOrbHero>

@@ -13,7 +13,7 @@ function Home() {
   return (
     <>
       {!loaded && <Preloader onFinish={() => setLoaded(true)} />}
-      <main className={loaded ? "opacity-100 transition-opacity duration-500" : "opacity-0"}>
+      <main className={loaded ? "opacity-100 transition-opacity duration-500 relative" : "opacity-0 relative"}>
         <Hero />
         <Slider />
         <About />
