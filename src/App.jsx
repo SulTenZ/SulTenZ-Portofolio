@@ -11,7 +11,7 @@ import AdminLayout from "./sections-admin/AdminLayout";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminSkills from "./pages/admin/AdminSkills";
 import AdminProjects from "./pages/admin/AdminProjects";
-import AdminSkillGroups from "./pages/admin/AdminSkillGroups"; // <— import baru
+import AdminSkillGroups from "./pages/admin/AdminSkillGroups";
 
 export default function App() {
   return (
@@ -23,7 +23,7 @@ export default function App() {
           element={
             <div className="bg-background min-h-screen flex flex-col">
               <Navbar />
-              <main className="flex-1">
+              <main className="flex-1 relative">
                 <Home />
               </main>
               <Footer />
@@ -35,7 +35,7 @@ export default function App() {
           element={
             <div className="bg-background min-h-screen flex flex-col">
               <Navbar />
-              <main className="flex-1">
+              <main className="flex-1 relative">
                 <Projects />
               </main>
               <Footer />
@@ -47,7 +47,7 @@ export default function App() {
           element={
             <div className="bg-background min-h-screen flex flex-col">
               <Navbar />
-              <main className="flex-1">
+              <main className="flex-1 relative">
                 <Contacts />
               </main>
               <Footer />
@@ -59,7 +59,7 @@ export default function App() {
         <Route path="/admin/*" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
           <Route path="skills" element={<AdminSkills />} />
-          <Route path="skill-groups" element={<AdminSkillGroups />} /> {/* route baru */}
+          <Route path="skill-groups" element={<AdminSkillGroups />} />
           <Route path="projects" element={<AdminProjects />} />
         </Route>
       </Routes>
