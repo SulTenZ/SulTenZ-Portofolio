@@ -1,10 +1,31 @@
+// convex/projects.ts
 import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
 
+// OPTIMIZATION: Query baru khusus untuk Home (hanya ambil 3 data terbaru)
+export const getRecent = query({
+  args: {},
+  handler: async (ctx) => {
+    // order("desc") mengurutkan berdasarkan waktu pembuatan (terbaru di atas)
+    // take(3) membatasi hanya mengambil 3 item
+    const projects = await ctx.db.query("projects").order("desc").take(3);
+
+    return Promise.all(
+      projects.map(async (project) => ({
+        ...project,
+        imageUrl: await ctx.storage.getUrl(project.imageStorageId),
+      }))
+    );
+  },
+});
+
+// Query untuk halaman All Projects
 export const list = query({
   args: {},
   handler: async (ctx) => {
-    const projects = await ctx.db.query("projects").collect();
+    // Tambahkan order("desc") agar list project selalu rapi dari yang terbaru
+    const projects = await ctx.db.query("projects").order("desc").collect();
+    
     return Promise.all(
       projects.map(async (project) => ({
         ...project,

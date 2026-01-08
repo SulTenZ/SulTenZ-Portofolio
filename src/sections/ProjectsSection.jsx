@@ -6,10 +6,8 @@ import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 
 function ProjectsSection() {
-  const projects = useQuery(api.projects.list) || [];
-
-  // Urutkan dari terbaru (opsional, bisa disesuaikan)
-  const topThree = [...projects].slice(0, 3);
+  // OPTIMIZATION: Gunakan 'getRecent' agar lebih hemat bandwidth
+  const projects = useQuery(api.projects.getRecent) || [];
 
   return (
     <section className="max-w-5xl mx-auto py-16 px-4" id="projects">
@@ -20,7 +18,8 @@ function ProjectsSection() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        {topThree.map((project) => (
+        {/* Tidak perlu .slice() lagi karena backend sudah membatasi 3 */}
+        {projects.map((project) => (
           <ProjectCard
             key={project._id}
             title={project.title}
