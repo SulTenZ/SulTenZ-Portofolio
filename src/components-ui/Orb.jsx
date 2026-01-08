@@ -1,4 +1,4 @@
-// src/components-ui/Orb.jsx
+// File: src/components-ui/Orb.jsx
 import { useEffect, useRef } from "react";
 import { Renderer, Program, Mesh, Triangle, Vec3 } from "ogl";
 
@@ -10,8 +10,9 @@ export default function Orb({
 }) {
   const ctnDom = useRef(null);
 
+  // OPTIMIZATION: Gunakan mediump float untuk mobile devices (jauh lebih cepat)
   const vert = /* glsl */ `
-    precision highp float;
+    precision mediump float;
     attribute vec2 position;
     attribute vec2 uv;
     varying vec2 vUv;
@@ -22,7 +23,7 @@ export default function Orb({
   `;
 
   const frag = /* glsl */ `
-    precision highp float;
+    precision mediump float;
 
     uniform float iTime;
     uniform vec3 iResolution;
@@ -58,14 +59,11 @@ export default function Orb({
       return yiq2rgb(yiq);
     }
 
+    // Hash function lighter version
     vec3 hash33(vec3 p3) {
       p3 = fract(p3 * vec3(0.1031, 0.11369, 0.13787));
       p3 += dot(p3, p3.yxz + 19.19);
-      return -1.0 + 2.0 * fract(vec3(
-        p3.x + p3.y,
-        p3.x + p3.z,
-        p3.y + p3.z
-      ) * p3.zyx);
+      return -1.0 + 2.0 * fract(vec3(p3.x + p3.y, p3.x + p3.z, p3.y + p3.z) * p3.zyx);
     }
 
     float snoise3(vec3 p) {
@@ -79,24 +77,9 @@ export default function Orb({
       vec3 d1 = d0 - (i1 - K2);
       vec3 d2 = d0 - (i2 - K1);
       vec3 d3 = d0 - 0.5;
-      vec4 h = max(0.6 - vec4(
-        dot(d0, d0),
-        dot(d1, d1),
-        dot(d2, d2),
-        dot(d3, d3)
-      ), 0.0);
-      vec4 n = h * h * h * h * vec4(
-        dot(d0, hash33(i)),
-        dot(d1, hash33(i + i1)),
-        dot(d2, hash33(i + i2)),
-        dot(d3, hash33(i + 1.0))
-      );
+      vec4 h = max(0.6 - vec4(dot(d0, d0), dot(d1, d1), dot(d2, d2), dot(d3, d3)), 0.0);
+      vec4 n = h * h * h * h * vec4(dot(d0, hash33(i)), dot(d1, hash33(i + i1)), dot(d2, hash33(i + i2)), dot(d3, hash33(i + 1.0)));
       return dot(vec4(31.316), n);
-    }
-
-    vec4 extractAlpha(vec3 colorIn) {
-      float a = max(max(colorIn.r, colorIn.g), colorIn.b);
-      return vec4(colorIn.rgb / (a + 1e-5), a);
     }
 
     const vec3 baseColor1 = vec3(0.611765, 0.262745, 0.996078);
@@ -142,9 +125,8 @@ export default function Orb({
       col = (col + v1) * v2 * v3;
       col = clamp(col, 0.0, 1.0);
 
-      // Alpha = orb glow saja, di luar radius tertentu = 0 (transparan)
-      float orbAlpha = smoothstep(1.1, 0.85, length(uv)); // area 0.85-1.1 = fade, di luar 1.1 = 0
-      return vec4(col, orbAlpha * col.r); // bisa juga orbAlpha * max(col.r, col.g, col.b)
+      float orbAlpha = smoothstep(1.1, 0.85, length(uv));
+      return vec4(col, orbAlpha * col.r);
     }
 
     vec4 mainImage(vec2 fragCoord) {
@@ -166,7 +148,7 @@ export default function Orb({
     void main() {
       vec2 fragCoord = vUv * iResolution.xy;
       vec4 col = mainImage(fragCoord);
-      if (col.a < 0.02) discard;  // pastikan pixel transparan tidak digambar (benar-benar no background)
+      if (col.a < 0.02) discard;
       gl_FragColor = col;
     }
   `;
@@ -177,7 +159,7 @@ export default function Orb({
 
     const renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
     const gl = renderer.gl;
-    gl.clearColor(0, 0, 0, 0); // Pastikan canvas selalu transparan!
+    gl.clearColor(0, 0, 0, 0);
     container.appendChild(gl.canvas);
 
     const geometry = new Triangle(gl);
@@ -187,11 +169,7 @@ export default function Orb({
       uniforms: {
         iTime: { value: 0 },
         iResolution: {
-          value: new Vec3(
-            gl.canvas.width,
-            gl.canvas.height,
-            gl.canvas.width / gl.canvas.height
-          ),
+          value: new Vec3(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height),
         },
         hue: { value: hue },
         hover: { value: 0 },
@@ -201,12 +179,16 @@ export default function Orb({
     });
 
     const mesh = new Mesh(gl, { geometry, program });
+    let cachedRect = container.getBoundingClientRect(); // OPTIMIZATION: Cache rect
 
     function resize() {
       if (!container) return;
-      const dpr = window.devicePixelRatio || 1;
-      const width = container.clientWidth;
-      const height = container.clientHeight;
+      // OPTIMIZATION: Batasi dpr max 2.0 untuk performa. Retina display tidak perlu render full resolution untuk efek noise.
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cachedRect = container.getBoundingClientRect(); // Update cached rect on resize
+      const width = cachedRect.width;
+      const height = cachedRect.height;
+      
       renderer.setSize(width * dpr, height * dpr);
       gl.canvas.style.width = width + "px";
       gl.canvas.style.height = height + "px";
@@ -216,7 +198,10 @@ export default function Orb({
         gl.canvas.width / gl.canvas.height
       );
     }
-    window.addEventListener("resize", resize);
+    
+    // Gunakan ResizeObserver untuk menangani resize container lebih efisien daripada window 'resize'
+    const resizeObserver = new ResizeObserver(() => resize());
+    resizeObserver.observe(container);
     resize();
 
     let targetHover = 0;
@@ -225,11 +210,11 @@ export default function Orb({
     const rotationSpeed = 0.3;
 
     const handleMouseMove = (e) => {
-      const rect = container.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const width = rect.width;
-      const height = rect.height;
+      // OPTIMIZATION: Gunakan cachedRect, jangan panggil getBoundingClientRect() di sini!
+      const x = e.clientX - cachedRect.left;
+      const y = e.clientY - cachedRect.top;
+      const width = cachedRect.width;
+      const height = cachedRect.height;
       const size = Math.min(width, height);
       const centerX = width / 2;
       const centerY = height / 2;
@@ -273,10 +258,12 @@ export default function Orb({
 
     return () => {
       cancelAnimationFrame(rafId);
-      window.removeEventListener("resize", resize);
+      resizeObserver.disconnect(); // Cleanup observer
       container.removeEventListener("mousemove", handleMouseMove);
       container.removeEventListener("mouseleave", handleMouseLeave);
-      container.removeChild(gl.canvas);
+      if (container.contains(gl.canvas)) {
+        container.removeChild(gl.canvas);
+      }
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
