@@ -14,9 +14,9 @@ const aboutSections = [
   },
   {
     name: "My Campus Life",
-    designation: "UTY Informatika Semester 6",
+    designation: "UTY Informatika Semester 7",
     quote:
-      "I'm currently a 6th semester Informatics student at Universitas Teknologi Yogyakarta (UTY). My daily life is all about coding, learning, and growing as a web developer. Campus projects and building real-world apps keep me busy and motivated.",
+      "I'm currently a 7th semester Informatics student at Universitas Teknologi Yogyakarta (UTY). My daily life is all about coding, learning, and growing as a web developer. Campus projects and building real-world apps keep me busy and motivated.",
     src: about2,
   },
   {
