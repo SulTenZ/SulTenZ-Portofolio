@@ -13,6 +13,7 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as message from "../message.js";
 import type * as projects from "../projects.js";
 import type * as skills from "../skills.js";
 import type * as skillsGroup from "../skillsGroup.js";
@@ -28,6 +29,7 @@ import type * as uploads from "../uploads.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  message: typeof message;
   projects: typeof projects;
   skills: typeof skills;
   skillsGroup: typeof skillsGroup;
