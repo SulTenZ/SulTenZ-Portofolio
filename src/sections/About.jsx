@@ -1,5 +1,6 @@
-// src/sections/About.jsx
 import { AnimatedTestimonials } from "../components-ui/AnimatedTestimonial";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import about1 from "../assets/about-1.jpg";
 import about2 from "../assets/about-2.jpg";
 import about3 from "../assets/about-3.jpg";
@@ -29,8 +30,19 @@ const aboutSections = [
 ];
 
 function About() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false, amount: 0.15 });
+
+  const premiumVariants = {
+    hidden: { opacity: 0, y: 80, scale: 0.9, rotateX: 15, filter: "blur(15px)" },
+    visible: { 
+      opacity: 1, y: 0, scale: 1, rotateX: 0, filter: "blur(0px)",
+      transition: { type: "spring", mass: 1.2, stiffness: 80, damping: 15 }
+    }
+  };
+
   return (
-    <section className="relative w-full min-h-screen py-32 px-0 bg-background" id="about">
+    <section ref={ref} className="relative w-full min-h-screen py-32 px-0 z-10" id="about" style={{ perspective: "1000px" }}>
       <div className="pointer-events-none absolute left-[-80px] bottom-[-80px] w-60 h-60 md:w-80 md:h-80 rounded-full 
             bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))]
             from-main/70 via-main/40 to-transparent blur-2xl opacity-60 z-0" />
@@ -38,10 +50,17 @@ function About() {
             bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))]
             from-secondary/70 via-secondary/40 to-transparent blur-2xl opacity-60 z-0" />
       
-      <div className="relative z-10 max-w-5xl mx-auto px-4">
-        <h2 className="font-jakarta text-4xl text-white font-bold mb-8">About Me</h2>
+      <motion.div 
+        className="relative z-10 max-w-5xl mx-auto px-4"
+        variants={premiumVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
+        <h2 className="font-jakarta text-4xl font-bold mb-8 text-white">
+          About Me
+        </h2>
         <AnimatedTestimonials testimonials={aboutSections} autoplay />
-      </div>
+      </motion.div>
     </section>
   );
 }

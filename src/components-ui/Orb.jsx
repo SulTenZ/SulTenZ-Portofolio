@@ -208,6 +208,17 @@ export default function Orb({
     let lastTime = 0;
     let currentRot = 0;
     const rotationSpeed = 0.3;
+    let isVisible = true;
+
+    const intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+        });
+      },
+      { threshold: 0 }
+    );
+    intersectionObserver.observe(container);
 
     const handleMouseMove = (e) => {
       // OPTIMIZATION: Gunakan cachedRect, jangan panggil getBoundingClientRect() di sini!
@@ -238,6 +249,11 @@ export default function Orb({
     let rafId;
     const update = (t) => {
       rafId = requestAnimationFrame(update);
+      if (!isVisible) {
+        lastTime = t;
+        return;
+      }
+
       const dt = (t - lastTime) * 0.001;
       lastTime = t;
       program.uniforms.iTime.value = t * 0.001;
@@ -258,6 +274,7 @@ export default function Orb({
 
     return () => {
       cancelAnimationFrame(rafId);
+      intersectionObserver.disconnect();
       resizeObserver.disconnect(); // Cleanup observer
       container.removeEventListener("mousemove", handleMouseMove);
       container.removeEventListener("mouseleave", handleMouseLeave);

@@ -68,7 +68,7 @@ function Navbar() {
 
       {/* Mobile Hamburger Button */}
       <button
-        className="md:hidden flex flex-col justify-center items-center w-6 h-6 space-y-1 z-60"
+        className="md:hidden flex flex-col justify-center items-center w-6 h-6 space-y-1 z-60 active:scale-95 transition-transform"
         onClick={toggleMobileMenu}
         aria-label="Toggle mobile menu"
       >
@@ -91,15 +91,15 @@ function Navbar() {
 
       {/* Mobile Navigation Menu */}
       <div
-        className={`md:hidden fixed top-0 right-0 w-1/2 h-screen bg-background transition-transform duration-300 z-50 ${
+        className={`md:hidden fixed top-0 right-0 w-3/4 max-w-[300px] h-[100dvh] bg-background transition-transform duration-300 z-50 ${
           mobileMenuOpen ? "transform translate-x-0" : "transform translate-x-full"
         }`}
       >
-        <div className="flex flex-col items-center justify-start h-full space-y-8 pt-20">
+        <div className="flex flex-col items-center justify-start h-full space-y-8 pt-20 pb-10 overflow-y-auto">
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `font-dmsans text-2xl hover:text-main transition ${isActive ? "text-secondary" : "text-white"}`
+              `font-dmsans text-2xl hover:text-main active:scale-95 transition-all ${isActive ? "text-secondary" : "text-white"}`
             }
             end
             onClick={() => setMobileMenuOpen(false)}
@@ -109,7 +109,7 @@ function Navbar() {
           <NavLink
             to="/projects"
             className={({ isActive }) =>
-              `font-dmsans text-2xl hover:text-main transition ${isActive ? "text-secondary" : "text-white"}`
+              `font-dmsans text-2xl hover:text-main active:scale-95 transition-all ${isActive ? "text-secondary" : "text-white"}`
             }
             onClick={() => setMobileMenuOpen(false)}
           >
@@ -118,7 +118,7 @@ function Navbar() {
           <NavLink
             to="/contacts"
             className={({ isActive }) =>
-              `font-dmsans text-2xl hover:text-main transition ${isActive ? "text-secondary" : "text-white"}`
+              `font-dmsans text-2xl hover:text-main active:scale-95 transition-all ${isActive ? "text-secondary" : "text-white"}`
             }
             onClick={() => setMobileMenuOpen(false)}
           >

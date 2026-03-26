@@ -23,7 +23,7 @@ function Hero() {
             </span>
           </h1>
           <div className="font-dmsans text-sm sm:text-lg md:text-2xl text-gray-200 mb-3 md:mb-4 tracking-widest flex flex-col gap-2 items-center text-center">
-            I DEVELOP & LEARNING ABOUT{" "}
+            I BUILD & LEARN ABOUT{" "}
             <FlipWords
               words={flipWords}
               duration={3000}
