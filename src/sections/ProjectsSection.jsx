@@ -11,7 +11,6 @@ function ProjectsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.15 });
 
-  // OPTIMIZATION: Gunakan 'getRecent' agar lebih hemat bandwidth
   const projectsQuery = useQuery(api.projects.getRecent);
   const projects = projectsQuery || [];
   const isLoading = projectsQuery === undefined;
@@ -22,7 +21,7 @@ function ProjectsSection() {
       opacity: 1, y: 0, scale: 1, rotateX: 0, filter: "blur(0px)",
       transition: { 
         type: "spring", mass: 1.2, stiffness: 80, damping: 15,
-        staggerChildren: 0.2 // Memberikan efek bergiliran untuk card
+        staggerChildren: 0.2
       }
     }
   };
@@ -37,7 +36,6 @@ function ProjectsSection() {
 
   return (
     <section ref={ref} className="relative w-full max-w-5xl mx-auto py-16 px-4" id="projects" style={{ perspective: "1000px" }}>
-      {/* Memisahkan background glow ke dalam container sendiri dengan overflow-hidden, agar card bisa expand tanpa terpotong! */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10 rounded-3xl">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-secondary/10 blur-[120px] rounded-full"></div>
       </div>
@@ -53,7 +51,6 @@ function ProjectsSection() {
           </h2>
         </div>
 
-        {/* Menerapkan trick kompensasi padding & margin untuk memberikan ruang ekstra agar shadow/hover scale tidak terpotong tepi. Posisi visual tetap konsisten. */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 p-5 -m-5 md:p-8 md:-m-8">
         {isLoading ? (
           Array.from({ length: 3 }).map((_, i) => (

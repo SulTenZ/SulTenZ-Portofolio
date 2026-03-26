@@ -2,17 +2,19 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./sections/Navbar";
 import Footer from "./sections/Footer";
+import { lazy, Suspense } from "react";
 import Home from "./pages/Home";
-import Projects from "./pages/Projects";
-import Contacts from "./pages/Contacts";
+
+const Projects = lazy(() => import("./pages/Projects"));
+const Contacts = lazy(() => import("./pages/Contacts"));
 
 // Admin
 import AdminLayout from "./sections-admin/AdminLayout";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import AdminSkills from "./pages/admin/AdminSkills";
-import AdminProjects from "./pages/admin/AdminProjects";
-import AdminSkillGroups from "./pages/admin/AdminSkillGroups";
-import AdminLogin from "./pages/admin/AdminLogin";
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const AdminSkills = lazy(() => import("./pages/admin/AdminSkills"));
+const AdminProjects = lazy(() => import("./pages/admin/AdminProjects"));
+const AdminSkillGroups = lazy(() => import("./pages/admin/AdminSkillGroups"));
+const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 import { AuthProvider, useAuth } from "./context/AuthContext";
 
 const ProtectedRoute = ({ children }) => {
@@ -25,6 +27,7 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <Suspense fallback={<div className="min-h-screen bg-background w-full" />}>
         <Routes>
           {/* public */}
           <Route
@@ -80,6 +83,7 @@ export default function App() {
             <Route path="projects" element={<AdminProjects />} />
           </Route>
         </Routes>
+        </Suspense>
       </BrowserRouter>
     </AuthProvider>
   );

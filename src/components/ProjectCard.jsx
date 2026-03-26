@@ -10,7 +10,7 @@ function ProjectCard({ title, description, image, link, techStack = [] }) {
 
   return (
     <div className="bg-[#171717] border border-[#232323] rounded-xl p-6 flex flex-col h-full transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,255,0.05)] hover:border-white/10 hover:bg-white/[0.02]">
-      <img src={image} alt={title} className="w-full h-40 object-cover rounded-md mb-4 flex-shrink-0" />
+      <img src={image} alt={title} loading="lazy" className="w-full h-40 object-cover rounded-md mb-4 flex-shrink-0" />
       <h3 className="font-jakarta text-xl font-bold text-white mb-2 text-left">
         {title}
       </h3>

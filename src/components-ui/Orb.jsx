@@ -10,7 +10,6 @@ export default function Orb({
 }) {
   const ctnDom = useRef(null);
 
-  // OPTIMIZATION: Gunakan mediump float untuk mobile devices (jauh lebih cepat)
   const vert = /* glsl */ `
     precision mediump float;
     attribute vec2 position;
@@ -179,13 +178,15 @@ export default function Orb({
     });
 
     const mesh = new Mesh(gl, { geometry, program });
-    let cachedRect = container.getBoundingClientRect(); // OPTIMIZATION: Cache rect
+    let cachedRect = container.getBoundingClientRect();
 
     function resize() {
       if (!container) return;
-      // OPTIMIZATION: Batasi dpr max 2.0 untuk performa. Retina display tidak perlu render full resolution untuk efek noise.
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      cachedRect = container.getBoundingClientRect(); // Update cached rect on resize
+      
+      const isMobile = window.innerWidth < 768;
+      const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2);
+      
+      cachedRect = container.getBoundingClientRect();
       const width = cachedRect.width;
       const height = cachedRect.height;
       
@@ -199,7 +200,6 @@ export default function Orb({
       );
     }
     
-    // Gunakan ResizeObserver untuk menangani resize container lebih efisien daripada window 'resize'
     const resizeObserver = new ResizeObserver(() => resize());
     resizeObserver.observe(container);
     resize();
@@ -221,7 +221,6 @@ export default function Orb({
     intersectionObserver.observe(container);
 
     const handleMouseMove = (e) => {
-      // OPTIMIZATION: Gunakan cachedRect, jangan panggil getBoundingClientRect() di sini!
       const x = e.clientX - cachedRect.left;
       const y = e.clientY - cachedRect.top;
       const width = cachedRect.width;

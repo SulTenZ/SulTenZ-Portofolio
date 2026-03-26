@@ -1,11 +1,12 @@
 // src/pages/Home.jsx
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import Preloader from "../components-ui/Preloader";
 import Hero from "../sections/Hero";
 import Slider from "../sections/Slider";
-import About from "../sections/About";
-import Skills from "../sections/Skills";
-import ProjectsSection from "../sections/ProjectsSection";
+
+const About = lazy(() => import("../sections/About"));
+const Skills = lazy(() => import("../sections/Skills"));
+const ProjectsSection = lazy(() => import("../sections/ProjectsSection"));
 
 function Home() {
   const [loaded, setLoaded] = useState(false);
@@ -16,9 +17,11 @@ function Home() {
       <main className={loaded ? "opacity-100 transition-opacity duration-500 relative" : "opacity-0 relative"}>
         <Hero />
         <Slider />
-        <About />
-        <Skills />
-        <ProjectsSection />
+        <Suspense fallback={<div className="h-screen bg-background" />}>
+          <About />
+          <Skills />
+          <ProjectsSection />
+        </Suspense>
       </main>
     </>
   );
