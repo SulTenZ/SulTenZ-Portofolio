@@ -15,9 +15,9 @@ const aboutSections = [
   },
   {
     name: "My Campus Life",
-    designation: "UTY Informatika Semester 7",
+    designation: "UTY Informatika Semester 8",
     quote:
-      "I'm currently a 7th semester Informatics student at Universitas Teknologi Yogyakarta (UTY). My daily life is all about coding, learning, and growing as a web developer. Campus projects and building real-world apps keep me busy and motivated.",
+      "I'm currently an 8th semester Informatics student at Universitas Teknologi Yogyakarta (UTY). My daily life is all about coding, learning, and growing as a web developer. Campus projects and building real-world apps keep me busy and motivated.",
     src: about2,
   },
   {
@@ -35,7 +35,7 @@ function About() {
 
   const premiumVariants = {
     hidden: { opacity: 0, y: 80, scale: 0.9, rotateX: 15, filter: "blur(15px)" },
-    visible: { 
+    visible: {
       opacity: 1, y: 0, scale: 1, rotateX: 0, filter: "blur(0px)",
       transition: { type: "spring", mass: 1.2, stiffness: 80, damping: 15 }
     }
@@ -49,8 +49,8 @@ function About() {
       <div className="pointer-events-none absolute right-0 top-0 w-48 h-48 md:w-72 md:h-72 rounded-full 
             bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))]
             from-secondary/70 via-secondary/40 to-transparent blur-2xl opacity-60 z-0" />
-      
-      <motion.div 
+
+      <motion.div
         className="relative z-10 max-w-5xl mx-auto px-4"
         variants={premiumVariants}
         initial="hidden"
