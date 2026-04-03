@@ -28,7 +28,7 @@ function Navbar() {
         ${scrolled ? "bg-background/90 shadow-lg backdrop-blur-md" : "bg-transparent"}`
       }
     >
-      {/* Logo */}
+
       <Link to="/" className="flex items-center">
         <img
           src={logo}
@@ -37,7 +37,7 @@ function Navbar() {
         />
       </Link>
 
-      {/* Desktop Navigation */}
+
       <div className="hidden md:flex gap-4 md:gap-10">
         <NavLink
           to="/"
@@ -66,7 +66,7 @@ function Navbar() {
         </NavLink>
       </div>
 
-      {/* Mobile Hamburger Button */}
+
       <button
         className="md:hidden flex flex-col justify-center items-center w-6 h-6 space-y-1 z-60 active:scale-95 transition-transform"
         onClick={toggleMobileMenu}
@@ -89,7 +89,7 @@ function Navbar() {
         />
       </button>
 
-      {/* Mobile Navigation Menu */}
+
       <div
         className={`md:hidden fixed top-0 right-0 w-3/4 max-w-[300px] h-[100dvh] bg-background transition-transform duration-300 z-50 ${
           mobileMenuOpen ? "transform translate-x-0" : "transform translate-x-full"
@@ -127,7 +127,7 @@ function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+
       {mobileMenuOpen && (
         <div
           className="md:hidden fixed inset-0 bg-black/50 z-40"

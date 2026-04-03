@@ -27,18 +27,16 @@ export const AnimatedTestimonials = ({
       const interval = setInterval(handleNext, 7000);
       return () => clearInterval(interval);
     }
-  }, [autoplay, active]); // <-- Tambahkan 'active' sebagai dependency untuk mereset interval saat navigasi manual
+  }, [autoplay, active]);
 
   const randomRotateY = () => {
     return Math.floor(Math.random() * 21) - 10;
   };
 
   return (
-    // [MODIFIED] Perbesar max-width untuk membuatnya lebih lebar
     <div className="mx-auto max-w-md px-4 py-20 font-sans antialiased md:max-w-5xl md:px-8 lg:px-12">
       <div className="relative grid grid-cols-1 gap-20 md:grid-cols-2">
         <div>
-          {/* [MODIFIED] Perbesar height untuk gambar */}
           <div className="relative h-96 w-full">
             <AnimatePresence>
               {testimonials.map((testimonial, index) => (
@@ -85,7 +83,7 @@ export const AnimatedTestimonials = ({
             </AnimatePresence>
           </div>
         </div>
-        {/* [MODIFIED] Tambahkan 'relative' agar tombol bisa diposisikan absolut terhadap kontainer ini */}
+ 
         <div className="relative flex flex-col py-4">
           <motion.div
             key={active}
@@ -138,7 +136,7 @@ export const AnimatedTestimonials = ({
               ))}
             </motion.p>
           </motion.div>
-          {/* [MODIFIED] Posisikan button secara absolut di bawah */}
+
           <div className="absolute bottom-4 flex gap-4">
             <button
               onClick={handlePrev}
