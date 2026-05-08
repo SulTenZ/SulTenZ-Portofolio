@@ -1,5 +1,4 @@
-// src/components-ui/Lanyard.jsx (Revisi Final)
-
+// src/components-ui/Lanyard.jsx
 'use client';
 import { useEffect, useRef, useState, useMemo, Suspense } from 'react';
 import { Canvas, extend, useFrame } from '@react-three/fiber';

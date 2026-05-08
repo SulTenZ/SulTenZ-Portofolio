@@ -44,7 +44,7 @@ export const Timeline = ({ data }) => {
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
   return (
-    <div className="w-full bg-transparent font-sans" ref={containerRef}>
+    <div className="relative w-full bg-transparent font-sans" ref={containerRef}>
       <div ref={ref} className="relative w-full pb-20">
 
         {data.map((item, index) => (

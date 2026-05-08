@@ -1,7 +1,7 @@
 // src/components-ui/AnimatedTestimonial.jsx
 "use client";
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
-import { motion, AnimatePresence } from "framer-motion"; // <-- Rekomendasi: ganti "motion/react" ke "framer-motion" untuk konsistensi
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export const AnimatedTestimonials = ({
@@ -83,7 +83,7 @@ export const AnimatedTestimonials = ({
             </AnimatePresence>
           </div>
         </div>
- 
+
         <div className="relative flex flex-col py-4">
           <motion.div
             key={active}
@@ -115,12 +115,10 @@ export const AnimatedTestimonials = ({
                 <motion.span
                   key={index}
                   initial={{
-                    filter: "blur(10px)",
                     opacity: 0,
                     y: 5,
                   }}
                   animate={{
-                    filter: "blur(0px)",
                     opacity: 1,
                     y: 0,
                   }}

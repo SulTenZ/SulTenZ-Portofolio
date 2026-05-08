@@ -6,9 +6,9 @@ import { api } from "../../convex/_generated/api";
 import { motion, useInView } from "framer-motion";
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.8, rotateX: -20, filter: "blur(10px)" },
+  hidden: { opacity: 0, y: 50, scale: 0.8, rotateX: -20 },
   visible: { 
-    opacity: 1, y: 0, scale: 1, rotateX: 0, filter: "blur(0px)",
+    opacity: 1, y: 0, scale: 1, rotateX: 0,
     transition: { type: "spring", mass: 1, stiffness: 100, damping: 15 }
   }
 };
@@ -35,9 +35,9 @@ export default function Skills() {
   const groups = useQuery(api.skills.listGroupsWithSkills) || [];
 
   const premiumVariants = {
-    hidden: { opacity: 0, y: 80, scale: 0.9, rotateX: 15, filter: "blur(15px)" },
+    hidden: { opacity: 0, y: 80, scale: 0.9, rotateX: 15 },
     visible: { 
-      opacity: 1, y: 0, scale: 1, rotateX: 0, filter: "blur(0px)",
+      opacity: 1, y: 0, scale: 1, rotateX: 0,
       transition: { type: "spring", mass: 1.2, stiffness: 80, damping: 15 }
     }
   };
