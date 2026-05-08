@@ -1,5 +1,5 @@
 import { AnimatedTestimonials } from "../components-ui/AnimatedTestimonial";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import about1 from "../assets/about-1.jpg";
 import about2 from "../assets/about-2.jpg";
@@ -33,6 +33,13 @@ function About() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.15 });
 
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  const parallaxScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
+
   const premiumVariants = {
     hidden: { opacity: 0, y: 80, scale: 0.9, rotateX: 15 },
     visible: {
@@ -52,6 +59,7 @@ function About() {
 
       <motion.div
         className="relative z-10 max-w-5xl mx-auto px-4"
+        style={{ scale: parallaxScale }}
         variants={premiumVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}

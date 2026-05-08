@@ -4,7 +4,7 @@ import Button from "../components/Button";
 import { Link } from "react-router-dom";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useVelocity, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
 
 function ProjectsSection() {
@@ -14,6 +14,14 @@ function ProjectsSection() {
   const projectsQuery = useQuery(api.projects.getRecent);
   const projects = projectsQuery || [];
   const isLoading = projectsQuery === undefined;
+
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, {
+    damping: 50,
+    stiffness: 400
+  });
+  const velocitySkew = useTransform(smoothVelocity, [-1000, 0, 1000], [-5, 0, 5]);
 
   const premiumVariants = {
     hidden: { opacity: 0, y: 80, scale: 0.9, rotateX: 15 },
@@ -58,7 +66,12 @@ function ProjectsSection() {
           ))
         ) : (
           projects.map((project) => (
-            <motion.div variants={cardVariants} key={project._id} className="h-full">
+            <motion.div 
+              variants={cardVariants} 
+              key={project._id} 
+              className="h-full transform-gpu origin-center"
+              style={{ skewY: velocitySkew }}
+            >
               <ProjectCard
                 title={project.title}
                 description={project.description}

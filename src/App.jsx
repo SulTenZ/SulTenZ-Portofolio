@@ -4,6 +4,7 @@ import Navbar from "./sections/Navbar";
 import Footer from "./sections/Footer";
 import { lazy, Suspense } from "react";
 import Home from "./pages/Home";
+import CursorOrbs from "./components-ui/CursorOrbs";
 
 const Projects = lazy(() => import("./pages/Projects"));
 const Contacts = lazy(() => import("./pages/Contacts"));
@@ -27,6 +28,7 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <CursorOrbs />
         <Suspense fallback={<div className="min-h-screen bg-background w-full" />}>
         <Routes>
           {/* public */}

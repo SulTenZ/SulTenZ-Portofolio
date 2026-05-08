@@ -3,7 +3,7 @@ import { Timeline } from "../components-ui/Timeline";
 import { useMemo, useRef } from "react";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 
 const itemVariants = {
   hidden: { opacity: 0, y: 50, scale: 0.8, rotateX: -20 },
@@ -31,6 +31,13 @@ const SkillIcon = ({ src, name }) => (
 export default function Skills() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.1 });
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  const parallaxScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
 
   const groups = useQuery(api.skills.listGroupsWithSkills) || [];
 
@@ -68,6 +75,7 @@ export default function Skills() {
     <section ref={ref} className="w-full min-h-screen py-32 px-0 z-0" id="skills" style={{ perspective: "1000px" }}>
       <motion.div 
         className="max-w-5xl mx-auto px-4"
+        style={{ scale: parallaxScale }}
         variants={premiumVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}

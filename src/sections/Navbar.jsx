@@ -2,11 +2,23 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const location = useLocation();
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious();
+    if (latest > previous && latest > 150) {
+      setHidden(true);
+    } else if (latest < previous) {
+      setHidden(false);
+    }
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -22,7 +34,13 @@ function Navbar() {
   const toggleMobileMenu = () => setMobileMenuOpen((prev) => !prev);
 
   return (
-    <nav
+    <motion.nav
+      variants={{
+        visible: { y: 0 },
+        hidden: { y: "-100%" },
+      }}
+      animate={hidden ? "hidden" : "visible"}
+      transition={{ duration: 0.35, ease: "easeInOut" }}
       className={
         `fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 py-4 md:px-8 md:py-6 transition-colors duration-500
         ${scrolled ? "bg-background/90 shadow-lg backdrop-blur-md" : "bg-transparent"}`
@@ -134,7 +152,7 @@ function Navbar() {
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
-    </nav>
+    </motion.nav>
   );
 }
 
