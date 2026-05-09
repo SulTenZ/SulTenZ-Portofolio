@@ -1,5 +1,6 @@
 // src/App.jsx
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "./sections/Navbar";
 import Footer from "./sections/Footer";
 import { lazy, Suspense } from "react";
@@ -24,67 +25,69 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
+const PublicLayout = ({ children }) => {
+  return (
+    <div className="bg-background min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex-1 relative">
+        {children}
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+const AnimatedRoutes = () => {
+  const location = useLocation();
+  const isAdmin = location.pathname.startsWith('/admin');
+
+  if (isAdmin) {
+    return (
+      <Routes>
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route 
+          path="/admin/*" 
+          element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<AdminDashboard />} />
+          <Route path="skills" element={<AdminSkills />} />
+          <Route path="skill-groups" element={<AdminSkillGroups />} />
+          <Route path="projects" element={<AdminProjects />} />
+        </Route>
+      </Routes>
+    );
+  }
+
+  const pageVariants = {
+    initial: { opacity: 0, y: 15 },
+    in: { opacity: 1, y: 0 },
+    out: { opacity: 0, y: -15 }
+  };
+
+  return (
+    <PublicLayout>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<motion.div initial="initial" animate="in" exit="out" variants={pageVariants} transition={{ duration: 0.4 }}><Home /></motion.div>} />
+          <Route path="/projects" element={<motion.div initial="initial" animate="in" exit="out" variants={pageVariants} transition={{ duration: 0.4 }}><Projects /></motion.div>} />
+          <Route path="/contacts" element={<motion.div initial="initial" animate="in" exit="out" variants={pageVariants} transition={{ duration: 0.4 }}><Contacts /></motion.div>} />
+        </Routes>
+      </AnimatePresence>
+    </PublicLayout>
+  );
+};
+
 export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <CursorOrbs />
         <Suspense fallback={<div className="min-h-screen bg-background w-full" />}>
-        <Routes>
-          {/* public */}
-          <Route
-            path="/"
-            element={
-              <div className="bg-background min-h-screen flex flex-col">
-                <Navbar />
-                <main className="flex-1 relative">
-                  <Home />
-                </main>
-                <Footer />
-              </div>
-            }
-          />
-          <Route
-            path="/projects"
-            element={
-              <div className="bg-background min-h-screen flex flex-col">
-                <Navbar />
-                <main className="flex-1 relative">
-                  <Projects />
-                </main>
-                <Footer />
-              </div>
-            }
-          />
-          <Route
-            path="/contacts"
-            element={
-              <div className="bg-background min-h-screen flex flex-col">
-                <Navbar />
-                <main className="flex-1 relative">
-                  <Contacts />
-                </main>
-                <Footer />
-              </div>
-            }
-          />
-
-          {/* admin */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route 
-            path="/admin/*" 
-            element={
-              <ProtectedRoute>
-                <AdminLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route index element={<AdminDashboard />} />
-            <Route path="skills" element={<AdminSkills />} />
-            <Route path="skill-groups" element={<AdminSkillGroups />} />
-            <Route path="projects" element={<AdminProjects />} />
-          </Route>
-        </Routes>
+          <AnimatedRoutes />
         </Suspense>
       </BrowserRouter>
     </AuthProvider>
