@@ -101,27 +101,23 @@ function Navbar() {
         aria-label="Toggle mobile menu"
       >
         <span
-          className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
-            mobileMenuOpen ? "rotate-45 translate-y-2" : ""
-          }`}
+          className={`block w-6 h-0.5 bg-white transition-all duration-300 ${mobileMenuOpen ? "rotate-45 translate-y-2" : ""
+            }`}
         />
         <span
-          className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
-            mobileMenuOpen ? "opacity-0" : ""
-          }`}
+          className={`block w-6 h-0.5 bg-white transition-all duration-300 ${mobileMenuOpen ? "opacity-0" : ""
+            }`}
         />
         <span
-          className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
-            mobileMenuOpen ? "-rotate-45 -translate-y-2" : ""
-          }`}
+          className={`block w-6 h-0.5 bg-white transition-all duration-300 ${mobileMenuOpen ? "-rotate-45 -translate-y-2" : ""
+            }`}
         />
       </button>
 
 
       <div
-        className={`md:hidden fixed top-0 right-0 w-3/4 max-w-[300px] h-[100dvh] bg-background transition-transform duration-300 z-50 ${
-          mobileMenuOpen ? "transform translate-x-0" : "transform translate-x-full"
-        }`}
+        className={`md:hidden fixed top-0 right-0 w-3/4 max-w-[300px] h-[100dvh] bg-background transition-transform duration-300 z-50 ${mobileMenuOpen ? "transform translate-x-0" : "transform translate-x-full"
+          }`}
       >
         <div className="flex flex-col items-center justify-start h-full space-y-8 pt-20 pb-10 overflow-y-auto">
           <NavLink

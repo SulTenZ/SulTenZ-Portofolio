@@ -11,7 +11,7 @@ import { api } from "../../convex/_generated/api";
 
 export function ContactForm() {
   const submitMessage = useAction(api.message.sendMessage);
-  
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,7 +27,7 @@ export function ContactForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("loading");
-    
+
     try {
       const result = await submitMessage(formData);
       if (result.success) {
@@ -55,7 +55,7 @@ export function ContactForm() {
           Pesan berhasil dikirim!
         </div>
       )}
-      
+
       {status === "error" && (
         <div className="mb-4 p-3 bg-red-900/30 border border-red-800 text-red-400 rounded-md text-sm text-center">
           Gagal mengirim pesan. Silakan coba lagi.
@@ -65,31 +65,31 @@ export function ContactForm() {
       <form onSubmit={handleSubmit} className="space-y-5">
         <LabelInputContainer>
           <Label htmlFor="name">Name</Label>
-          <Input 
-            id="name" 
-            placeholder="Your Name" 
-            required 
+          <Input
+            id="name"
+            placeholder="Your Name"
+            required
             value={formData.name}
             onChange={handleChange}
           />
         </LabelInputContainer>
         <LabelInputContainer>
           <Label htmlFor="email">Email Address</Label>
-          <Input 
-            id="email" 
-            type="email" 
-            placeholder="you@example.com" 
-            required 
+          <Input
+            id="email"
+            type="email"
+            placeholder="you@example.com"
+            required
             value={formData.email}
             onChange={handleChange}
           />
         </LabelInputContainer>
         <LabelInputContainer>
           <Label htmlFor="subject">Subject</Label>
-          <Input 
-            id="subject" 
-            placeholder="Subject" 
-            required 
+          <Input
+            id="subject"
+            placeholder="Subject"
+            required
             value={formData.subject}
             onChange={handleChange}
           />

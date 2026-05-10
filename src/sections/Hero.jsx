@@ -14,7 +14,7 @@ function Hero() {
 
   return (
     <section id="home" className="w-full h-screen min-h-[540px] relative overflow-hidden flex items-center justify-center">
-      <motion.div 
+      <motion.div
         className="absolute inset-0 w-full h-full z-0 pointer-events-none"
         initial={{ opacity: 0 }}
         animate={appLoaded ? { opacity: 1 } : { opacity: 0 }}
@@ -24,7 +24,7 @@ function Hero() {
       </motion.div>
       <div className="w-full h-full flex items-center justify-center px-3 md:px-4 relative z-10">
         <div className="max-w-[400px] sm:max-w-[600px] md:max-w-[900px] w-full mx-auto flex flex-col items-center text-center">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={appLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
@@ -35,7 +35,7 @@ function Hero() {
               <ColourfulText text="SULTAN^^" />
             </span>
           </motion.h1>
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={appLoaded ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.8, duration: 1 }}

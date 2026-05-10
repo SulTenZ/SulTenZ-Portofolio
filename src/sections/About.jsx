@@ -65,9 +65,9 @@ function About() {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <TextReveal 
-          text="About Me" 
-          className="font-jakarta text-4xl font-bold mb-8 text-white justify-center md:justify-start" 
+        <TextReveal
+          text="About Me"
+          className="font-jakarta text-4xl font-bold mb-8 text-white justify-center md:justify-start"
         />
         <AnimatedTestimonials testimonials={aboutSections} autoplay />
       </motion.div>

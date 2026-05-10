@@ -8,14 +8,14 @@ import { TextReveal } from "../components-ui/TextReveal";
 
 const itemVariants = {
   hidden: { opacity: 0, x: 30, scale: 0.8 },
-  visible: { 
+  visible: {
     opacity: 1, x: 0, scale: 1,
     transition: { type: "spring", mass: 1, stiffness: 120, damping: 15 }
   }
 };
 
 const SkillIcon = ({ src, name }) => (
-  <motion.div 
+  <motion.div
     variants={itemVariants}
     className="relative w-[90px] h-[115px] text-neutral-400 group cursor-pointer"
     style={{ perspective: "1000px" }}
@@ -44,7 +44,7 @@ export default function Skills() {
 
   const premiumVariants = {
     hidden: { opacity: 0, y: 80, scale: 0.9, rotateX: 15 },
-    visible: { 
+    visible: {
       opacity: 1, y: 0, scale: 1, rotateX: 0,
       transition: { type: "spring", mass: 1.2, stiffness: 80, damping: 15 }
     }
@@ -54,20 +54,20 @@ export default function Skills() {
     return groups.map((g) => ({
       title: g.name,
       content: (
-        <motion.div 
+        <motion.div
           className="flex flex-wrap justify-end gap-6 md:gap-8 mb-4"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: false, amount: 0.2 }}
           variants={{
             hidden: { opacity: 0, x: 50 },
-            visible: { 
-              opacity: 1, 
+            visible: {
+              opacity: 1,
               x: 0,
-              transition: { 
-                type: "spring", stiffness: 80, damping: 20, 
-                staggerChildren: 0.1, delayChildren: 0.1 
-              } 
+              transition: {
+                type: "spring", stiffness: 80, damping: 20,
+                staggerChildren: 0.1, delayChildren: 0.1
+              }
             },
           }}
         >
@@ -81,16 +81,16 @@ export default function Skills() {
 
   return (
     <section ref={ref} className="w-full min-h-screen py-32 px-0 z-0" id="skills" style={{ perspective: "1000px" }}>
-      <motion.div 
+      <motion.div
         className="max-w-5xl mx-auto px-4"
         style={{ scale: parallaxScale }}
         variants={premiumVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <TextReveal 
-          text="Skills" 
-          className="font-jakarta text-4xl text-white font-bold mb-6 justify-center md:justify-start" 
+        <TextReveal
+          text="Skills"
+          className="font-jakarta text-4xl text-white font-bold mb-6 justify-center md:justify-start"
         />
         <Timeline data={data} />
       </motion.div>

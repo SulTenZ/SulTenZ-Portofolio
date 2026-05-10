@@ -25,9 +25,9 @@ function ProjectsSection() {
 
   const premiumVariants = {
     hidden: { opacity: 0, y: 80, scale: 0.9, rotateX: 15 },
-    visible: { 
+    visible: {
       opacity: 1, y: 0, scale: 1, rotateX: 0,
-      transition: { 
+      transition: {
         type: "spring", mass: 1.2, stiffness: 80, damping: 15,
         staggerChildren: 0.2
       }
@@ -36,7 +36,7 @@ function ProjectsSection() {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50, scale: 0.8 },
-    visible: { 
+    visible: {
       opacity: 1, y: 0, scale: 1,
       transition: { type: "spring", mass: 1, stiffness: 80, damping: 15 }
     }
@@ -60,28 +60,28 @@ function ProjectsSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 p-5 -m-5 md:p-8 md:-m-8">
-        {isLoading ? (
-          Array.from({ length: 3 }).map((_, i) => (
-            <motion.div variants={cardVariants} key={i} className="animate-pulse bg-white/5 rounded-xl h-64 w-full"></motion.div>
-          ))
-        ) : (
-          projects.map((project) => (
-            <motion.div 
-              variants={cardVariants} 
-              key={project._id} 
-              className="h-full transform-gpu origin-center"
-              style={{ skewY: velocitySkew }}
-            >
-              <ProjectCard
-                title={project.title}
-                description={project.description}
-                image={project.imageUrl}
-                link={project.link}
-                techStack={project.techStack}
-              />
-            </motion.div>
-          ))
-        )}
+          {isLoading ? (
+            Array.from({ length: 3 }).map((_, i) => (
+              <motion.div variants={cardVariants} key={i} className="animate-pulse bg-white/5 rounded-xl h-64 w-full"></motion.div>
+            ))
+          ) : (
+            projects.map((project) => (
+              <motion.div
+                variants={cardVariants}
+                key={project._id}
+                className="h-full transform-gpu origin-center"
+                style={{ skewY: velocitySkew }}
+              >
+                <ProjectCard
+                  title={project.title}
+                  description={project.description}
+                  image={project.imageUrl}
+                  link={project.link}
+                  techStack={project.techStack}
+                />
+              </motion.div>
+            ))
+          )}
         </div>
 
         <div className="flex justify-center mt-8">
