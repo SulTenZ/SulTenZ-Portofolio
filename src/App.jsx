@@ -3,9 +3,10 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-route
 import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "./sections/Navbar";
 import Footer from "./sections/Footer";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import Home from "./pages/Home";
 import CursorOrbs from "./components-ui/CursorOrbs";
+import Lenis from "lenis";
 
 const Projects = lazy(() => import("./pages/Projects"));
 const Contacts = lazy(() => import("./pages/Contacts"));
@@ -87,6 +88,30 @@ const AnimatedRoutes = () => {
 };
 
 export default function App() {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   return (
     <AuthProvider>
       <LoadingProvider>

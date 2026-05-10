@@ -4,6 +4,7 @@ import { useRef } from "react";
 import about1 from "../assets/about-1.jpg";
 import about2 from "../assets/about-2.jpg";
 import about3 from "../assets/about-3.jpg";
+import { TextReveal } from "../components-ui/TextReveal";
 
 const aboutSections = [
   {
@@ -64,9 +65,10 @@ function About() {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <h2 className="font-jakarta text-4xl font-bold mb-8 text-white">
-          About Me
-        </h2>
+        <TextReveal 
+          text="About Me" 
+          className="font-jakarta text-4xl font-bold mb-8 text-white justify-center md:justify-start" 
+        />
         <AnimatedTestimonials testimonials={aboutSections} autoplay />
       </motion.div>
     </section>

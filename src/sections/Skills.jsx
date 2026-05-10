@@ -4,12 +4,13 @@ import { useMemo, useRef } from "react";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { TextReveal } from "../components-ui/TextReveal";
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.8, rotateX: -20 },
+  hidden: { opacity: 0, x: 30, scale: 0.8 },
   visible: { 
-    opacity: 1, y: 0, scale: 1, rotateX: 0,
-    transition: { type: "spring", mass: 1, stiffness: 100, damping: 15 }
+    opacity: 1, x: 0, scale: 1,
+    transition: { type: "spring", mass: 1, stiffness: 120, damping: 15 }
   }
 };
 
@@ -59,8 +60,15 @@ export default function Skills() {
           whileInView="visible"
           viewport={{ once: false, amount: 0.2 }}
           variants={{
-            visible: { transition: { staggerChildren: 0.1 } },
-            hidden: {},
+            hidden: { opacity: 0, x: 50 },
+            visible: { 
+              opacity: 1, 
+              x: 0,
+              transition: { 
+                type: "spring", stiffness: 80, damping: 20, 
+                staggerChildren: 0.1, delayChildren: 0.1 
+              } 
+            },
           }}
         >
           {g.skills.map((s) => (
@@ -80,7 +88,10 @@ export default function Skills() {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <h2 className="font-jakarta text-4xl text-white font-bold mb-6">Skills</h2>
+        <TextReveal 
+          text="Skills" 
+          className="font-jakarta text-4xl text-white font-bold mb-6 justify-center md:justify-start" 
+        />
         <Timeline data={data} />
       </motion.div>
     </section>
