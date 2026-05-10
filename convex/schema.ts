@@ -40,4 +40,11 @@ export default defineSchema({
     message: v.string(),
     createdAt: v.number(),
   }),
+
+  certificates: defineTable({
+    title: v.string(),
+    issuer: v.string(),
+    date: v.string(),
+    imageStorageId: v.id("_storage"),
+  }),
 });

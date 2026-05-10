@@ -31,6 +31,7 @@ export default function Sidebar() {
         <NavLink to="/admin/skill-groups" className={itemClass}>Skill Groups</NavLink>
         <NavLink to="/admin/skills" className={itemClass}>Skills</NavLink>
         <NavLink to="/admin/projects" className={itemClass}>Projects</NavLink>
+        <NavLink to="/admin/certificates" className={itemClass}>Certificates</NavLink>
       </nav>
 
       <div className="p-4 border-t border-white/40">

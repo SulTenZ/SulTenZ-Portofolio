@@ -3,8 +3,10 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { useLoading } from "../context/LoadingContext";
 
 function Navbar() {
+  const { appLoaded } = useLoading();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
@@ -36,11 +38,11 @@ function Navbar() {
   return (
     <motion.nav
       variants={{
-        visible: { y: 0 },
-        hidden: { y: "-100%" },
+        visible: { y: 0, transition: { delay: 1.5, duration: 0.5, ease: "easeOut" } },
+        hidden: { y: "-100%", transition: { duration: 0.35, ease: "easeInOut" } },
       }}
-      animate={hidden ? "hidden" : "visible"}
-      transition={{ duration: 0.35, ease: "easeInOut" }}
+      initial="hidden"
+      animate={!appLoaded || hidden ? "hidden" : "visible"}
       className={
         `fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 py-4 md:px-8 md:py-6 transition-colors duration-500
         ${scrolled ? "bg-background/90 shadow-lg backdrop-blur-md" : "bg-transparent"}`
@@ -73,6 +75,14 @@ function Navbar() {
           }
         >
           PROJECT
+        </NavLink>
+        <NavLink
+          to="/certificates"
+          className={({ isActive }) =>
+            `font-dmsans text-base md:text-lg hover:text-main transition ${isActive ? "text-secondary" : "text-white"}`
+          }
+        >
+          CERTIFICATES
         </NavLink>
         <NavLink
           to="/contacts"
@@ -132,6 +142,15 @@ function Navbar() {
             onClick={() => setMobileMenuOpen(false)}
           >
             PROJECT
+          </NavLink>
+          <NavLink
+            to="/certificates"
+            className={({ isActive }) =>
+              `font-dmsans text-2xl hover:text-main active:scale-95 transition-all ${isActive ? "text-secondary" : "text-white"}`
+            }
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            CERTIFICATES
           </NavLink>
           <NavLink
             to="/contacts"

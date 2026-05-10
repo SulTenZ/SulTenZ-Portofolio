@@ -9,15 +9,18 @@ import CursorOrbs from "./components-ui/CursorOrbs";
 
 const Projects = lazy(() => import("./pages/Projects"));
 const Contacts = lazy(() => import("./pages/Contacts"));
+const Certificates = lazy(() => import("./pages/Certificates"));
 
 // Admin
 import AdminLayout from "./sections-admin/AdminLayout";
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const AdminSkills = lazy(() => import("./pages/admin/AdminSkills"));
 const AdminProjects = lazy(() => import("./pages/admin/AdminProjects"));
+const AdminCertificates = lazy(() => import("./pages/admin/AdminCertificates"));
 const AdminSkillGroups = lazy(() => import("./pages/admin/AdminSkillGroups"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 import { AuthProvider, useAuth } from "./context/AuthContext";
+import { LoadingProvider } from "./context/LoadingContext";
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -57,6 +60,7 @@ const AnimatedRoutes = () => {
           <Route path="skills" element={<AdminSkills />} />
           <Route path="skill-groups" element={<AdminSkillGroups />} />
           <Route path="projects" element={<AdminProjects />} />
+          <Route path="certificates" element={<AdminCertificates />} />
         </Route>
       </Routes>
     );
@@ -75,6 +79,7 @@ const AnimatedRoutes = () => {
           <Route path="/" element={<motion.div initial="initial" animate="in" exit="out" variants={pageVariants} transition={{ duration: 0.4 }}><Home /></motion.div>} />
           <Route path="/projects" element={<motion.div initial="initial" animate="in" exit="out" variants={pageVariants} transition={{ duration: 0.4 }}><Projects /></motion.div>} />
           <Route path="/contacts" element={<motion.div initial="initial" animate="in" exit="out" variants={pageVariants} transition={{ duration: 0.4 }}><Contacts /></motion.div>} />
+          <Route path="/certificates" element={<motion.div initial="initial" animate="in" exit="out" variants={pageVariants} transition={{ duration: 0.4 }}><Certificates /></motion.div>} />
         </Routes>
       </AnimatePresence>
     </PublicLayout>
@@ -84,12 +89,14 @@ const AnimatedRoutes = () => {
 export default function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <CursorOrbs />
-        <Suspense fallback={<div className="min-h-screen bg-background w-full" />}>
-          <AnimatedRoutes />
-        </Suspense>
-      </BrowserRouter>
+      <LoadingProvider>
+        <BrowserRouter>
+          <CursorOrbs />
+          <Suspense fallback={<div className="min-h-screen bg-background w-full" />}>
+            <AnimatedRoutes />
+          </Suspense>
+        </BrowserRouter>
+      </LoadingProvider>
     </AuthProvider>
   );
 }

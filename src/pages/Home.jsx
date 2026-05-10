@@ -1,6 +1,5 @@
 // src/pages/Home.jsx
-import { useState, lazy, Suspense } from "react";
-import Preloader from "../components-ui/Preloader";
+import { lazy, Suspense } from "react";
 import Hero from "../sections/Hero";
 import Slider from "../sections/Slider";
 
@@ -9,12 +8,9 @@ const Skills = lazy(() => import("../sections/Skills"));
 const ProjectsSection = lazy(() => import("../sections/ProjectsSection"));
 
 function Home() {
-  const [loaded, setLoaded] = useState(false);
-
   return (
     <>
-      {!loaded && <Preloader onFinish={() => setLoaded(true)} />}
-      <main className={loaded ? "opacity-100 transition-opacity duration-500 relative" : "opacity-0 relative"}>
+      <main className="relative">
         <Hero />
         <Slider />
         <Suspense fallback={<div className="h-screen bg-background" />}>
